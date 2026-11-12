@@ -1,0 +1,49 @@
+# NotifyLib: уведомления в углу экрана. Перечитать: /notify reload
+# Неверное значение не ломает плагин: в лог пишется предупреждение и берётся значение по умолчанию.
+# Ресурспак плагин НЕ собирает и НЕ раздаёт: папка resourcepack лежит отдельно, раздавай её своим плагином.
+
+defaults:
+  corner: TOP_LEFT          # TOP_LEFT | TOP_RIGHT | BOTTOM_LEFT | BOTTOM_RIGHT (игрок может выбрать свой через API)
+  duration: 5s              # 1s..51s; также 100t (тики) или 4000ms
+  max-visible: 4            # 1..4 уведомлений на экране одновременно
+  overflow: QUEUE           # QUEUE | REPLACE_OLDEST | DROP, когда стопка полна
+  queue-limit: 10           # сколько уведомлений ждут в очереди у одного игрока
+  sound: true               # общий выключатель звуков
+  new-position: END         # END: новое уведомление в конец стопки; CORNER: к самому углу, старые сдвигаются
+
+# Игрок без ресурспака (отказался или не скачалось): ACTIONBAR | CHAT | NONE
+fallback: ACTIONBAR
+
+# Свои типы уведомлений для /notify send и для других плагинов (NotifyLib.api().types().get(key)).
+# Встроенные: info, success, warning, error (символы U+E200..U+E20F заняты ими).
+# Иконку и полосу типа нужно добавить в ресурспак самому, см. README, раздел «Свой тип».
+#   key        : ключ типа, namespace:name
+#   glyph      : первый из 4 своих символов в шрифте notifylib:toast (E210, E214, E218, ...)
+#   bar-color  : цвет полосы (для fallback; саму полосу рисует текстура в паке)
+#   icon-width : ширина иконки в пикселях, по умолчанию 9
+#   sound      : звук при показе (необязательно)
+types: []
+#  - key: mistik:donate
+#    glyph: E210
+#    bar-color: "#FFB000"
+#    icon-width: 9
+#    sound: entity.player.levelup
+
+# Где хранить личные настройки игроков (угол, вкл/выкл, звук, скрытые типы).
+# host пустой: локально, в данных игрока на этом сервере (на каждом сервере свои).
+# host указан: в MySQL, настройки общие для всех серверов с тем же MySQL. Меняется только после рестарта.
+storage:
+  mysql:
+    host: ""
+    port: 3306
+    database: minecraft
+    user: root
+    password: ""
+    table: notifylib_settings
+    pool-size: 4
+    properties: "sslMode=PREFERRED&characterEncoding=utf8"
+
+# Трассировка фаз уведомлений в лог
+debug: false
+
+# Тексты команд лежат в messages.yml

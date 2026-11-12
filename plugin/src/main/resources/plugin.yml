@@ -1,0 +1,22 @@
+name: NotifyLib
+version: '${project.version}'
+main: ru.fell.notifylib.plugin.NotifyLibPlugin
+api-version: '1.21.11'
+author: fell
+description: Corner notifications via boss bar + resource pack shader
+# Боссбары отправляются пакетами через PacketEvents
+depend: [packetevents]
+# Paper скачивает их с Maven Central при первом запуске; нужны только если задан storage.mysql.host
+libraries:
+  - com.zaxxer:HikariCP:${hikari.version}
+  - com.mysql:mysql-connector-j:${mysql.version}
+
+permissions:
+  notifylib.send:
+    description: /notify send
+    default: op
+  notifylib.admin:
+    description: /notify types, /notify reload
+    default: op
+    children:
+      notifylib.send: true

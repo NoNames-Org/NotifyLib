@@ -1,0 +1,20 @@
+# NotifyLib: тексты команд в формате MiniMessage. Перечитать: /notify reload
+# Если ключ удалить, берётся значение из этого же файла внутри jar.
+# Подстановки в <угловых скобках> (<count>, <type>, ...) заполняет плагин.
+
+prefix: "<gray>[<gold>Уведомления</gold>]</gray> "
+
+# /notify send
+unknown-type: "<red>Неизвестный тип уведомления: <white><type></white>"
+send-done: "<green>Уведомление отправлено игрокам: <white><count></white>"
+send-no-targets: "<red>Нет подходящих игроков."
+
+# /notify types
+types-header: "<gold>Типы уведомлений: <white><count></white>"
+types-line: "<gray>- <white><key></white> <bar> <dark_gray>(<glyph>)</dark_gray>"
+
+# /notify reload
+reload-done: "<green>Конфиг и сообщения перечитаны."
+
+# Описание команды в /help (меняется после перезапуска сервера)
+command-notify: "NotifyLib"
